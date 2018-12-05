@@ -23,6 +23,7 @@
                        </thead>
                         @foreach($items as $value)
                             <tr>
+                                {{ Form::hidden('idbarang[]', $value->id) }}
                                 <td>{{ Form::text('nama[]', $value->nama, array('class'=>'form-control')) }}</td>
                                 <td>{{ Form::text('jumlah[]', $value->jumlah, array('class'=>'form-control')) }}</td>
                                 <td>{{ Form::text('satuan[]', $value->satuan, array('class'=>'form-control')) }}</td>

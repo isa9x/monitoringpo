@@ -123,16 +123,19 @@ class PoController extends Controller
     {
         $jumlah=@count($request['nama']);
         $items = Barang::all();
-        $barang = $items->where('po_id', $id);
-        dd($barang);
-        for($i=0;$i < $jumlah; ++$i){
-                $barang->nama=$request['nama'][$i];
-                $barang->jumlah=$request['jumlah'][$i];
-                $barang->satuan=$request['satuan'][$i];
-                $barang->harga=$request['harga'][$i];
-            
-                $barang->update();
-        }
+        //$barang = $items->where('po_id', $id);
+
+            for($i=0;$i < $jumlah; ++$i){
+            \DB::table('barang')
+                ->where('po_id', $id)
+                ->where('id',$request['idbarang'][$i])
+                ->update([
+                    'nama' => $request['nama'][$i],
+                    'jumlah' => $request['jumlah'][$i],
+                    'satuan' => $request['satuan'][$i],
+                    'harga' => $request['harga'][$i],
+                ]);
+            }
 
         return redirect('po')->with('success','Update Barang PO Berhasil');
     }
