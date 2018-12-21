@@ -23,6 +23,11 @@ Route::get('/po/{po}/editbarang', 'PoController@editBarang');
 Route::resource('po','PoController');
 Route::put('/po/{po}','PoController@updateBarang')->name('po.updateBarang');
 
+Route::get('/search',[
+	'as' => 'api.search',
+	'uses' => 'PoController@searching'
+]);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

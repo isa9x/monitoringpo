@@ -14,11 +14,31 @@
                     </div>
                 @endif --}}
                 
+            
+
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
                     <a class="btn btn-success" href="{{ route('po.create') }}">Input PO</a>
                 </div>
             </div>
+			
+			<form method="GET" action="{{ route('api.search') }}">
+            <div class="row">
+				<div class="col-lg-4 pull-right">						
+						<div class="form-group">
+							{!! Form::select('kategori', array('po' => 'Berdasarkan No PO', 'barang' => 'Berdasarkan Nama Barang / Jasa'),array('class'=>'form-group')) !!}
+							<button class="btn btn-success">Search</button>
+						</div>
+				</div>
+				
+				
+				<div class="col-lg-6 pull-right">
+						<div class="form-group">
+							<input type="text" name="keyword" class="form-control" placeholder="Masukkan Keyword Pencarian">	
+						</div>
+				</div>
+			</div> 
+			</form>
             
             <div class="row">
                 <div class="col-lg-12">
@@ -31,7 +51,7 @@
                             <th>Tanggal PO</th>
                             <th>Tanggal Kirim Ke Vendor</th>
                             <th>Nama Vendor</th>
-                            <th>Status</th>
+                            <th width="300px">Status</th>
                             <th>Operation</th>
                         </tr>
                     

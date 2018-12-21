@@ -139,6 +139,29 @@ class PoController extends Controller
 
         return redirect('po')->with('success','Update Barang PO Berhasil');
     }
+
+    public function searching(Request $request)
+    {
+        $error = ['error' => 'No results found, please try with different keywords.'];
+
+        if($request->has('keyword')) {
+            if($request->kategori == 'barang'){
+                // $barang = Barang::search($request->get('keyword'))->get();
+                // return $barang->count() ? $barang : $error;
+                $barang = Barang::search($request->get('keyword'))->paginate(10);
+                return view('po.index',compact('barang'))
+                ->with('i', (request()->input('page', 1) - 1) * 10);
+            }else if($request->kategori == 'po'){
+                // $po = Po::search($request->get('keyword'))->get();
+                // return $po->count() ? $po : $error;
+                $barang = Po::search($request->get('keyword'))->paginate(10);
+                return view('po.index',compact('barang'))
+                ->with('i', (request()->input('page', 1) - 1) * 10);
+            }
+        }
+        return $error;
+    }
+
     /**
      * Remove the specified resource from storage.
      *

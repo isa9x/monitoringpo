@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Carbon\Carbon;
 
 class Po extends Model
 {
+     use Searchable;
      protected $table = 'po';
      protected $fillable = [
         'user_id',
@@ -20,4 +22,8 @@ class Po extends Model
     public function barang(){
         return $this->hasMany('App\Barang');
     }
+
+    // public function searchableAs(){
+    //     return 'nomor';
+    // }
 }
