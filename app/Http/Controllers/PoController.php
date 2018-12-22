@@ -154,7 +154,7 @@ class PoController extends Controller
             }else if($request->kategori == 'po'){
                 // $po = Po::search($request->get('keyword'))->get();
                 // return $po->count() ? $po : $error;
-                $barang = Po::search($request->get('keyword'))->paginate(10);
+                $po = Po::search($request->get('keyword'))->paginate(10);
                 return view('po.index',compact('barang'))
                 ->with('i', (request()->input('page', 1) - 1) * 10);
             }

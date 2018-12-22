@@ -54,26 +54,49 @@
                             <th width="300px">Status</th>
                             <th>Operation</th>
                         </tr>
-                    
-                        @foreach ($barang as $value)
-                            <tr>
-                                <td>{{ ++$i }}</td>
-                                <td>{{ $value->po->nomor }}</td>
-                                <td>{{ $value->nama }}</td>
-                                <td>{{ \Carbon\Carbon::parse($value->po->tanggal_po)->format('d/m/Y') }}</td>
-                                <td>{{ \Carbon\Carbon::parse($value->po->tanggal_kirim)->format('d/m/Y') }}</td>
-                                <td>{{ $value->po->nama_vendor }}</td>
-                                <td>{{ $value->po->status }}</td>
-                                <td>
-                                    <a href="{{action('PoController@edit', $value->po_id)}}" class="btn btn-warning">Edit</a>
-                                    {!! Form::model($value, ['method' => 'delete', 'route' => ['po.destroy', $value->po_id], 'style'=>'display:inline','class'=>'hapus']) !!}
-                                   {!! Form::hidden('id', $value->po_id) !!}
-                                    {!! Form::submit(trans('Hapus'), ['class' => 'btn btn-danger delete', 'name' => 'delete_modal']) !!}
-                                    {!! Form::close() !!}
+                    	
+                    	@if(exist($barang))
+	                        @foreach ($barang as $value)
+	                            <tr>
+	                                <td>{{ ++$i }}</td>
+	                                <td>{{ $value->po->nomor }}</td>
+	                                <td>{{ $value->nama }}</td>
+	                                <td>{{ \Carbon\Carbon::parse($value->po->tanggal_po)->format('d/m/Y') }}</td>
+	                                <td>{{ \Carbon\Carbon::parse($value->po->tanggal_kirim)->format('d/m/Y') }}</td>
+	                                <td>{{ $value->po->nama_vendor }}</td>
+	                                <td>{{ $value->po->status }}</td>
+	                                <td>
+	                                    <a href="{{action('PoController@edit', $value->po_id)}}" class="btn btn-warning">Edit</a>
+	                                    {!! Form::model($value, ['method' => 'delete', 'route' => ['po.destroy', $value->po_id], 'style'=>'display:inline','class'=>'hapus']) !!}
+	                                   {!! Form::hidden('id', $value->po_id) !!}
+	                                    {!! Form::submit(trans('Hapus'), ['class' => 'btn btn-danger delete', 'name' => 'delete_modal']) !!}
+	                                    {!! Form::close() !!}
 
-                                </td>
-                            </tr>
-                        @endforeach
+	                                </td>
+	                            </tr>
+	                        @endforeach
+                        @elseif(exist($po))
+	                        @foreach ($barang as $value)
+	                            <tr>
+	                                <td>{{ ++$i }}</td>
+	                                <td>{{ $value->po->nomor }}</td>
+	                                <td>{{ $value->nama }}</td>
+	                                <td>{{ \Carbon\Carbon::parse($value->po->tanggal_po)->format('d/m/Y') }}</td>
+	                                <td>{{ \Carbon\Carbon::parse($value->po->tanggal_kirim)->format('d/m/Y') }}</td>
+	                                <td>{{ $value->po->nama_vendor }}</td>
+	                                <td>{{ $value->po->status }}</td>
+	                                <td>
+	                                    <a href="{{action('PoController@edit', $value->po_id)}}" class="btn btn-warning">Edit</a>
+	                                    {!! Form::model($value, ['method' => 'delete', 'route' => ['po.destroy', $value->po_id], 'style'=>'display:inline','class'=>'hapus']) !!}
+	                                   {!! Form::hidden('id', $value->po_id) !!}
+	                                    {!! Form::submit(trans('Hapus'), ['class' => 'btn btn-danger delete', 'name' => 'delete_modal']) !!}
+	                                    {!! Form::close() !!}
+
+	                                </td>
+	                            </tr>
+	                        @endforeach
+                        @endif
+                       
                     </table>
                     
                     {!! $barang->render() !!}
