@@ -149,15 +149,17 @@ class PoController extends Controller
                 // $barang = Barang::search($request->get('keyword'))->get();
                 // return $barang->count() ? $barang : $error;
                 $barang = Barang::search($request->get('keyword'))->paginate(10);
-                return view('po.index',compact('barang'))
+                return view('po.indexsearch',compact('barang'))
                 ->with('i', (request()->input('page', 1) - 1) * 10);
             }else if($request->kategori == 'po'){
                 // $po = Po::search($request->get('keyword'))->get();
                 // return $po->count() ? $po : $error;
-                $po = Po::search($request->get('keyword'))->paginate(10);
-                return view('po.index',compact('barang'))
+                $po = Po::search($request->get('keyword'))->first();
+                $barang = Barang::where('po_id',$po->id)->paginate(10);
+                return view('po.indexsearch',compact('barang'))
                 ->with('i', (request()->input('page', 1) - 1) * 10);
             }
+
         }
         return $error;
     }
