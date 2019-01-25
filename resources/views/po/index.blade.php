@@ -107,3 +107,5 @@
 
 </script>
 @stop
+
+{{-- Our model factory is ready, let's create some data. In your command line run: php artisan tinker and then: factory(App\Product::class, 100)->create();. You can create as many records as you want, 100 sounds perfect to me. --}}

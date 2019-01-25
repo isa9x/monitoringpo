@@ -14,6 +14,12 @@ class PoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+  
     public function index()
     {
         $barang = Barang::latest()->groupBy('po_id')->paginate(10);

@@ -23,6 +23,11 @@ class Po extends Model
         return $this->hasMany('App\Barang');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
+    
     // public function searchableAs(){
     //     return 'nomor';
     // }

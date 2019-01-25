@@ -15,7 +15,10 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Po::class, function (Faker $faker) {
     return [
-        'nomor' => $faker->numberBetween(900000, 5000000), 
+        'nomor' => $faker->numberBetween(900000, 5000000),
+        'user_id' => function () {
+            return factory(App\User::class)->create()->id;
+        },
         'nama_vendor' => $faker->name,
         'tanggal_po' => $faker->dateTime,
         'tanggal_kirim' => $faker->dateTime,
